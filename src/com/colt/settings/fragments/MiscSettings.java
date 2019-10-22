@@ -24,7 +24,7 @@ import com.android.settings.R;
 
 import java.util.Arrays;
 import java.util.HashSet;
-
+import com.colt.settings.utils.Utils;
 import com.android.settings.SettingsPreferenceFragment;
 
 public class MiscSettings extends SettingsPreferenceFragment implements
@@ -33,9 +33,15 @@ public class MiscSettings extends SettingsPreferenceFragment implements
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        final String KEY_DEVICE_PART = "oneplus_shit";
+        final String KEY_DEVICE_PART_PACKAGE_NAME = "com.oneplus.shit.settings";
 
         addPreferencesFromResource(R.xml.colt_settings_misc);
 
+        // OnePlus Shit
+        if (!Utils.isPackageInstalled(getActivity(), KEY_DEVICE_PART_PACKAGE_NAME)) {
+            getPreferenceScreen().removePreference(findPreference(KEY_DEVICE_PART));
+        }
     }
 
     @Override
